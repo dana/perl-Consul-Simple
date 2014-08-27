@@ -7,6 +7,7 @@ use Test::More qw(no_plan);
 
 use_ok 'Consul::Simple', 'loaded Consul::Simple';
 Consul::Simple::Test::init_tests();
+exit 0; #for now, not going to distribute the timeout test
 
 eval {
     my @warnings = ();
