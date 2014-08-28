@@ -64,6 +64,7 @@ sub _do_request {
             $ret = $self->{ua}->request($req, %req_args);
         };
         alarm 0;
+        last if $ret->status_line =~ /^404 /;
         last if $ret and $ret->is_success;
         my $err;
         if($@) {
@@ -79,7 +80,8 @@ sub _do_request {
 
 sub KVGet {
     my $self = shift;
-    my $key = shift or die 'Consul::Simple::KVGet: key required as first argument';
+    my $key = shift;
+    die 'Consul::Simple::KVGet: key required as first argument' unless defined $key;
     my %args;
     {   my @args = @_;
         die 'Consul::Simple::KVGet: even number of arguments required'
@@ -117,7 +119,8 @@ sub KVGet {
 
 sub KVPut {
     my $self = shift;
-    my $key = shift or die 'Consul::Simple::KVPut: key required as first argument';
+    my $key = shift;
+    die 'Consul::Simple::KVPut: key required as first argument' unless defined $key;
     my $value = shift or die 'Consul::Simple::KVPut: value required as second argument';
     if(ref $value) {
         $value = JSON::encode_json($value);
@@ -140,17 +143,20 @@ sub _mk_kv_url {
 
 sub KVDelete {
     my $self = shift;
-    my $key = shift or die 'Consul::Simple::KVDelete: key required as first argument';
+    my $key = shift;
+    die 'Consul::Simple::KVDelete: key required as first argument' unless defined $key;
     my %args;
     {   my @args = @_;
         die 'Consul::Simple::KVPut: even number of arguments required'
             if scalar @args % 2;
         %args = @args;
     }
+    my $url = $self->_mk_kv_url($key);
+    $url .= '?recurse' if $args{recurse};
     my $res = $self->_do_request(
         HTTP::Request::Common::_simple_req(
             'DELETE',
-            $self->_mk_kv_url($key)
+            $url
         )
     );
     return $res;
