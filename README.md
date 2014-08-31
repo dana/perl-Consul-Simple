@@ -53,7 +53,7 @@ Simple interface to Consul (http://www.consul.io/)
 Your basic constructor.  It does not take any external action, so it can not
 fail.
 
-- kvPrefix (optional)
+- kv\_prefix (optional)
 
     Adds this prefix to all key/value operations, essentially giving you a
     'namespace' inside of Consul, for the life of this object.  Defaults to
@@ -92,7 +92,7 @@ This calls the Consul HTTP PUT method to set a value in the key/value store.
 
 - key (required)
 
-    This is the key, optionally prefixed by kvPrefix in the constructor.  No
+    This is the key, optionally prefixed by kv\_prefix in the constructor.  No
     encoding is done; this is passed to Consul as is.
 
 - value (required)
@@ -109,7 +109,7 @@ The data that was previous PUT is found in the Value field of each record.
 
 - key (required)
 
-    This is the key, optionally prefixed by kvPrefix in the constructor.  No
+    This is the key, optionally prefixed by kv\_prefix in the constructor.  No
     encoding is done; this is passed to Consul as is.
 
 - recurse (optional)
@@ -124,10 +124,10 @@ from the key/value store.
 
 - key (required)
 
-    This is the key, optionally prefixed by kvPrefix in the constructor.  No
+    This is the key, optionally prefixed by kv\_prefix in the constructor.  No
     encoding is done; this is passed to Consul as is.
 
-- recurse (optional) ##unimplemented
+- recurse (optional)
 
     Causes the ?recurse flag to be sent along, which will cause Consul to delete
     all of the records 'below' the passed key.
