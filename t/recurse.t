@@ -9,7 +9,7 @@ use_ok 'Consul::Simple', 'loaded Consul::Simple';
 Consul::Simple::Test::init_tests();
 
 eval {
-    ok my $c = Consul::Simple->new(kvPrefix => 'CPANTest'), 'recurse: instance created';
+    ok my $c = Consul::Simple->new(kv_prefix => 'CPANTest'), 'recurse: instance created';
     ok $c->KVPut('foo/bar', 'one'), 'recurse: first PUT succeeded';
     ok $c->KVPut('foo/fuz', { two => 2 }), 'recurse: second PUT succeeded';
     eval {

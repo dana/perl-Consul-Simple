@@ -9,7 +9,7 @@ use_ok 'Consul::Simple', 'loaded Consul::Simple';
 Consul::Simple::Test::init_tests();
 
 eval {
-    ok my $c = Consul::Simple->new(kvPrefix => 'CPANTest'), 'recurse-delete: instance created';
+    ok my $c = Consul::Simple->new(kv_prefix => 'CPANTest'), 'recurse-delete: instance created';
     ok $c->KVPut('foo/bar', 'one'), 'recurse-delete: first PUT succeeded';
     ok $c->KVPut('foo/fuz', { two => 2 }), 'recurse-delete: second PUT succeeded';
     ok $c->KVDelete('', recurse => 1), 'recurse-delete: recursive delete succeeded';

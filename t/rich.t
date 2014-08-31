@@ -9,7 +9,7 @@ use_ok 'Consul::Simple', 'loaded Consul::Simple';
 Consul::Simple::Test::init_tests();
 
 eval {
-    ok my $c = Consul::Simple->new(kvPrefix => 'CPANTest'), 'rich: instance created';
+    ok my $c = Consul::Simple->new(kv_prefix => 'CPANTest'), 'rich: instance created';
     ok $c->KVPut('foo',{ hi => 'there', this => [1,2,3] }), 'rich: PUT succeeded';
     eval {
         ok my @ret = $c->KVGet('foo'), 'rich: GET succeeded';

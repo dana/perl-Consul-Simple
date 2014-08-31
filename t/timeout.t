@@ -12,7 +12,7 @@ exit 0; #for now, not going to distribute the timeout test
 eval {
     my @warnings = ();
     ok my $c = Consul::Simple->new(
-        kvPrefix => 'CPANTest',
+        kv_prefix => 'CPANTest',
         warning_handler => sub {
             my $warnstr = shift;
             my %args = @_;
@@ -45,7 +45,7 @@ ok((not $@), 'timeout(1): outer: no exception thrown');
 eval {
     my @warnings = ();
     ok my $c = Consul::Simple->new(
-        kvPrefix => 'CPANTest',
+        kv_prefix => 'CPANTest',
         warning_handler => sub {
             my $warnstr = shift;
             my %args = @_;

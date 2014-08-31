@@ -23,7 +23,7 @@ eval {
 ok((not $@), 'instance invocation: no exception thrown');
 
 eval {
-    ok my $c = Consul::Simple->new(kvPrefix => 'CPANTest'), 'basic PUT: instance created';
+    ok my $c = Consul::Simple->new(kv_prefix => 'CPANTest'), 'basic PUT: instance created';
     ok $c->KVPut('foo','bar'), 'basic PUT: PUT succeeded';
     eval {
         ok my @ret = $c->KVGet('foo'), 'basic PUT: GET succeeded';
